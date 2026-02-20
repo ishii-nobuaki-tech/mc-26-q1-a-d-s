@@ -4,11 +4,9 @@ import RefererGuard from "./RefererGuard";
 
 const App: React.FC = () => {
   return (
-    <RefererGuard>
     <div className="min-h-screen bg-gray-50">
       <EffectCalculator />
     </div>
-    </RefererGuard>
   );
 };
 
