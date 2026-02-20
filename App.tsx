@@ -1,5 +1,6 @@
 import React from 'react';
 import EffectCalculator from './components/EffectCalculator';
+import RefererGuard from "./RefererGuard";
 
 const App: React.FC = () => {
   return (
