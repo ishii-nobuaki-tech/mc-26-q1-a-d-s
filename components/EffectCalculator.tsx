@@ -856,7 +856,7 @@ export default function EffectCalculator() {
                 {isRatioInvalid ? "比率の合計が100%になるように調整してみよう！" :
                  results.profit === 0 && !cost ? "数値を入力して、試算を始めてみよう！" : 
                  results.profit > 0 ? `すごいね！${formatCurrency(results.profit)}円の黒字が見込めそうだよ！` : 
-                 `${formatCurrency(Math.abs(results.profit))}円の赤字になりそうだよ。コストや目標値を見直してみよう！`}
+                 `${formatCurrency(Math.abs(results.profit))}円の赤字になりそうだよ。施策のコストや内容を見直してみよう！`}
               </p>
             </div>
           </div>
