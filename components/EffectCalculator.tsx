@@ -690,7 +690,7 @@ export default function EffectCalculator() {
               </div>
               <h1 className="text-2xl font-black text-slate-800 tracking-tight">施策の期待効果試算</h1>
             </div>
-            <p className="text-slate-400 text-[10px] font-bold tracking-[0.2em] uppercase pl-1">Marketing Simulator</p>
+            <p className="text-slate-400 text-[10px] font-bold tracking-[0.2em] uppercase pl-1">MARKETING CALCULATOR</p>
           </div>
 
           <div className="mb-8">
@@ -714,7 +714,7 @@ export default function EffectCalculator() {
             <button onClick={() => setActiveTab('regular')} className={`flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all duration-300 ${activeTab === 'regular' ? 'bg-white text-[#29a1c0] shadow-md scale-[1.02]' : 'text-gray-400 hover:text-gray-600'}`}><RefreshCw size={16} />定常</button>
           </div>
 
-          <div className="space-y-1 overflow-y-auto max-h-[500px] pr-2 custom-scrollbar -mr-2 pl-1 pt-1 pb-1">
+          <div className="space-y-1 pl-1 pt-1 pb-1">
             {/* Common Inputs */}
             {(category === CATEGORIES.UPSELL.id || category === CATEGORIES.CROSSSELL.id) && (
               <>
@@ -738,13 +738,10 @@ export default function EffectCalculator() {
             <InputField label="施策の対象顧客数" icon={Users} value={targetCount} onChange={setTargetCount} suffix="人" placeholder="10,000" />
             <InputField label={category === CATEGORIES.CHURN.id ? "解約率改善幅" : "想定CVR"} icon={BarChart2} value={cvr} onChange={setCvr} suffix="%" placeholder="1.5" />
 
-            {/* Acquisition Ratios (Shown BEFORE Cost) */}
-            {isAcqRatioMode && <RatioInputs />}
+            {/* Ratios (Shown BEFORE Cost) */}
+            {(isAcqRatioMode || isUpsellRatioMode) && <RatioInputs />}
 
             <InputField label="施策コスト" icon={DollarSign} value={cost} onChange={setCost} suffix="円" placeholder="500,000" />
-            
-            {/* Upsell/Crosssell Ratios (Shown AFTER Cost) */}
-            {isUpsellRatioMode && <RatioInputs />}
 
             {activeTab === 'regular' && <InputField label="施策実施期間" icon={Calendar} value={duration} onChange={setDuration} suffix="ヶ月" placeholder="12" />}
           </div>
@@ -760,7 +757,7 @@ export default function EffectCalculator() {
               </div>
               {isAcqRatioMode ? (
                 <div className="grid grid-cols-1 gap-y-1">
-                  <span className="font-bold text-slate-700">顧客全体{ltvSuffix}：¥{formatNumber(currentLtvSet.OVERALL)}</span>
+                  <span>顧客全体{ltvSuffix}：¥{formatNumber(currentLtvSet.OVERALL)}</span>
                   <span>プロ野球きっかけ顧客{ltvSuffix}: ¥{formatNumber(currentLtvSet.PRO_BASEBALL)}</span>
                   <span>F1きっかけ顧客{ltvSuffix}: ¥{formatNumber(currentLtvSet.F1)}</span>
                   <span>韓流きっかけ顧客{ltvSuffix}: ¥{formatNumber(currentLtvSet.HALLYU)}</span>
