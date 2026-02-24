@@ -132,9 +132,9 @@ const SukappyIcon: React.FC<{ className?: string; variant?: CharacterVariant }> 
 
 const SukappyImage: React.FC<{ variant: CharacterVariant }> = ({ variant }) => {
   const [imgError, setImgError] = useState(false);
-  const happyImage = "https://sptvjsat365.sharepoint.com/:i:/r/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_fun.png?csf=1&web=1&e=8YGrqM";
-  const sadImage = "https://sptvjsat365.sharepoint.com/:i:/r/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_sad.png?csf=1&web=1&e=aEaEka";
-  const normalImage = "https://sptvjsat365.sharepoint.com/:i:/r/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_normal.png?csf=1&web=1&e=9LrcIa";
+  const happyImage = "https://sptvjsat365.sharepoint.com/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_fun.png";
+  const sadImage = "https://sptvjsat365.sharepoint.com/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_sad.png";
+  const normalImage = "https://sptvjsat365.sharepoint.com/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_normal.png";
 
   useEffect(() => { setImgError(false); }, [variant]);
 
