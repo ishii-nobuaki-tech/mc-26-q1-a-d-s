@@ -61,23 +61,23 @@ const LTV_RETURN = {
 };
 
 const UPSELL_DURATIONS = {
-  PRO_BASEBALL: 7.3,
-  F1: 7.3,
-  HALLYU: 7.2,
-  BASIC: 17.1,
-  OTHERS: 6.6
+  PRO_BASEBALL: 6.3,
+  F1: 6.3,
+  HALLYU: 6.2,
+  BASIC: 16.1,
+  OTHERS: 5.6
 };
 
 const CROSSSELL_DURATIONS = {
-  PRO_BASEBALL: 11.0,
-  F1: 12.3,
-  HALLYU: 9.9,
-  BASIC: 30.7,
-  OTHERS: 12.4
+  PRO_BASEBALL: 10.0,
+  F1: 11.3,
+  HALLYU: 8.9,
+  BASIC: 29.7,
+  OTHERS: 11.4
 };
 
-const UPSELL_DURATION_OVERALL = 7.1;
-const CROSSSELL_DURATION_OVERALL = 12.8;
+const UPSELL_DURATION_OVERALL = 6.1;
+const CROSSSELL_DURATION_OVERALL = 11.8;
 
 // --- Sub Components ---
 
@@ -132,9 +132,9 @@ const SukappyIcon: React.FC<{ className?: string; variant?: CharacterVariant }> 
 
 const SukappyImage: React.FC<{ variant: CharacterVariant }> = ({ variant }) => {
   const [imgError, setImgError] = useState(false);
-  const happyImage = `${import.meta.env.BASE_URL}skappy_fun.png`;
-  const sadImage = `${import.meta.env.BASE_URL}skappy_sad.png`;
-  const normalImage = `${import.meta.env.BASE_URL}skappy_normal.png`;
+  const happyImage = "https://sptvjsat365.sharepoint.com/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_fun.png";
+  const sadImage = "https://sptvjsat365.sharepoint.com/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_sad.png";
+  const normalImage = "https://sptvjsat365.sharepoint.com/sites/marketing-calculator/SiteAssets/SitePages/Home/skappy_normal.png";
 
   useEffect(() => { setImgError(false); }, [variant]);
 
@@ -239,7 +239,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, value, onChange, icon: I
 };
 
 const ResultCard: React.FC<{ label: string; value: string | number; unit: string; highlight?: boolean; subtitle?: string; disabled?: boolean }> = ({ label, value, unit, highlight = false, subtitle, disabled = false }) => (
-  <div className={`relative overflow-hidden p-5 md:p-6 rounded-3xl transition-all duration-300 flex flex-col justify-between min-h-[120px] ${
+  <div className={`relative overflow-hidden p-4 md:p-5 rounded-3xl transition-all duration-300 flex flex-col justify-between min-h-[100px] ${
     disabled 
       ? 'bg-gray-50 border border-gray-100 text-gray-300'
       : highlight
@@ -247,7 +247,7 @@ const ResultCard: React.FC<{ label: string; value: string | number; unit: string
         : 'bg-white border border-gray-100 text-gray-800 shadow-lg shadow-gray-100/50 hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1'
   }`}>
     <div className="relative z-10">
-      <div className={`text-[10px] md:text-xs font-bold uppercase tracking-widest mb-2 truncate opacity-90 ${disabled ? 'text-gray-300' : highlight ? 'text-cyan-50' : 'text-gray-400'}`}>
+      <div className={`text-[10px] md:text-xs font-bold uppercase tracking-widest mb-1.5 truncate opacity-90 ${disabled ? 'text-gray-300' : highlight ? 'text-cyan-50' : 'text-gray-400'}`}>
         {label}
       </div>
       <div className="flex items-baseline gap-1.5 flex-wrap">
@@ -258,7 +258,7 @@ const ResultCard: React.FC<{ label: string; value: string | number; unit: string
           {disabled ? '' : unit}
         </span>
       </div>
-      {subtitle && <div className={`text-xs mt-2 ${disabled ? 'text-gray-300' : highlight ? 'text-cyan-100' : 'text-gray-400'}`}>{subtitle}</div>}
+      {subtitle && <div className={`text-xs mt-1.5 ${disabled ? 'text-gray-300' : highlight ? 'text-cyan-100' : 'text-gray-400'}`}>{subtitle}</div>}
     </div>
     {/* Decorative background element */}
     <div className={`absolute -right-6 -bottom-6 w-32 h-32 rounded-full blur-3xl ${highlight ? 'bg-white/20' : 'bg-gray-100'}`}></div>
@@ -266,16 +266,16 @@ const ResultCard: React.FC<{ label: string; value: string | number; unit: string
 );
 
 const DetailRow: React.FC<DetailItem> = ({ label, formula, calculation, result, unit }) => (
-  <div className="py-4 border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors px-2 -mx-2 rounded-lg">
-    <div className="text-sm font-bold text-slate-700 mb-1.5 flex items-center gap-2">
+  <div className="py-2.5 border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors px-2 -mx-2 rounded-lg">
+    <div className="text-sm font-bold text-slate-700 mb-1 flex items-center gap-2">
       <div className="w-1.5 h-1.5 rounded-full bg-[#29a1c0]"></div>
       {label}
     </div>
-    <div className="text-xs text-slate-400 font-mono mb-2 pl-3.5">{formula}</div>
-    <div className="flex flex-wrap items-center gap-3 text-sm bg-slate-50 p-3 rounded-xl border border-slate-100 ml-3.5">
+    <div className="text-[11px] text-slate-400 font-mono mb-1.5 pl-3.5">{formula}</div>
+    <div className="flex flex-wrap items-center gap-2 text-sm bg-slate-50 p-2 rounded-xl border border-slate-100 ml-3.5">
       <span className="font-mono text-slate-600 break-all">{calculation}</span>
       <span className="text-slate-300">=</span>
-      <span className="font-bold text-[#29a1c0] whitespace-nowrap bg-white px-2 py-0.5 rounded shadow-sm border border-slate-100">{result}<span className="text-xs ml-0.5 font-normal">{unit}</span></span>
+      <span className="font-bold text-[#29a1c0] whitespace-nowrap bg-white px-2 py-0.5 rounded shadow-sm border border-slate-100">{result}<span className="text-[10px] ml-0.5 font-normal">{unit}</span></span>
     </div>
   </div>
 );
@@ -372,7 +372,7 @@ export default function EffectCalculator() {
       const numTarget = parseFloat(targetCount) || 0;
       const numCvr = parseFloat(cvr) || 0;
       const totalSubs = Math.floor(numTarget * (numCvr / 100));
-      primaryMetric = totalSubs;
+      primaryMetric = totalSubs * effectiveDuration;
 
       const { valid, msg, rPB, rF1, rHL, rBS, rOT } = checkRatio();
       if (!valid) { isValid = false; error = msg; }
@@ -384,10 +384,10 @@ export default function EffectCalculator() {
           grossProfit = totalSubs * ltvSet.OVERALL;
           
           details.push({
-            label: primaryLabel,
+            label: isRegular ? `${primaryLabel}（1ヶ月あたり）` : primaryLabel,
             formula: '施策の対象顧客数 × 想定CVR',
             calculation: `${f(numTarget)}人 × ${f(numCvr)}%`,
-            result: f(primaryMetric),
+            result: f(totalSubs),
             unit: '人'
           });
           details.push({
@@ -412,17 +412,17 @@ export default function EffectCalculator() {
             (nOT * ltvSet.OTHERS);
 
           details.push({
-            label: primaryLabel,
+            label: isRegular ? `${primaryLabel}（1ヶ月あたり）` : primaryLabel,
             formula: '施策の対象顧客数 × 想定CVR',
             calculation: `${f(numTarget)}人 × ${f(numCvr)}%`,
-            result: f(primaryMetric),
+            result: f(totalSubs),
             unit: '人'
           });
           details.push({
             label: isReturn ? '各ジャンルの再加入者数' : '各ジャンルの新規加入者数',
             formula: isReturn ? '想定再加入者数（総数） × 加入者構成比率' : '想定新規加入者数（総数） × 加入者構成比率',
             calculation: `プロ野球:${f(nPB)}人, F1:${f(nF1)}人, 韓流:${f(nHL)}人, 基本プラン:${f(nBS)}人, その他:${f(nOT)}人`,
-            result: f(primaryMetric),
+            result: f(totalSubs),
             unit: '人'
           });
           details.push({
@@ -435,7 +435,7 @@ export default function EffectCalculator() {
         }
 
         profit = (grossProfit * effectiveDuration) - numCost;
-        sacOrArpu = (primaryMetric > 0) ? (numCost / primaryMetric / effectiveDuration) : 0;
+        sacOrArpu = (primaryMetric > 0) ? (numCost / primaryMetric) : 0;
 
         details.push({
           label: '想定利益',
@@ -455,14 +455,17 @@ export default function EffectCalculator() {
       sacLabel = null;
       const numTarget = parseFloat(targetCount) || 0;
       const numCvr = parseFloat(cvr) || 0;
-      primaryMetric = Math.floor(numTarget * (numCvr / 100));
-      profit = (primaryMetric * ARPU * MARGIN_RATE * effectiveDuration) - numCost;
+      const monthlyMetric = Math.floor(numTarget * (numCvr / 100));
+      primaryMetric = monthlyMetric * effectiveDuration;
+      profit = (monthlyMetric * ARPU * MARGIN_RATE * effectiveDuration) - numCost;
       sacOrArpu = 0;
 
       details.push({
-        label: primaryLabel, formula: '施策の対象顧客数 × 解約率改善幅',
+        label: isRegular ? `${primaryLabel}（1ヶ月あたり）` : primaryLabel,
+        formula: '施策の対象顧客数 × 解約率改善幅',
         calculation: `${f(numTarget)}人 × ${f(numCvr)}%`,
-        result: f(primaryMetric), unit: '人'
+        result: f(monthlyMetric),
+        unit: '人'
       });
       details.push({
         label: '想定利益', 
@@ -470,8 +473,8 @@ export default function EffectCalculator() {
           ? '想定解約抑止顧客数 × 想定ARPU × 粗利率（0.3） × 期間 － 施策コスト' 
           : '想定解約抑止顧客数 × 想定ARPU × 粗利率（0.3） － 施策コスト',
         calculation: isRegular
-          ? `${f(primaryMetric)}人 × ${f(ARPU)}円 × 0.3 × ${f(effectiveDuration)}ヶ月 － ${f(numCost)}円`
-          : `${f(primaryMetric)}人 × ${f(ARPU)}円 × 0.3 － ${f(numCost)}円`,
+          ? `${f(monthlyMetric)}人 × ${f(ARPU)}円 × 0.3 × ${f(effectiveDuration)}ヶ月 － ${f(numCost)}円`
+          : `${f(monthlyMetric)}人 × ${f(ARPU)}円 × 0.3 － ${f(numCost)}円`,
         result: fc(profit), unit: '円'
       });
 
@@ -486,7 +489,8 @@ export default function EffectCalculator() {
       const numTarget = parseFloat(targetCount) || 0;
       const numCvr = parseFloat(cvr) || 0;
       // Calculate successful conversions based on target and CVR
-      primaryMetric = Math.floor(numTarget * (numCvr / 100));
+      const monthlyMetric = Math.floor(numTarget * (numCvr / 100));
+      primaryMetric = monthlyMetric * effectiveDuration;
 
       const hasPriceAfter = priceAfter !== '' && !isNaN(parseFloat(priceAfter));
       const pAfter = hasPriceAfter ? parseFloat(priceAfter) : 0;
@@ -510,19 +514,19 @@ export default function EffectCalculator() {
         if (isOverallMode) {
           const durationVal = isUpsell ? UPSELL_DURATION_OVERALL : CROSSSELL_DURATION_OVERALL;
           const durationName = isUpsell ? 'アップセル後の推定継続期間' : 'クロスセル後の推定継続期間';
-          totalUserMonths = primaryMetric * durationVal;
+          totalUserMonths = monthlyMetric * durationVal;
           details.push({
              label: '総継続月数', formula: `${term}の想定顧客数 × 全体の${durationName}`,
-             calculation: `${f(primaryMetric)}人 × ${durationVal}ヶ月`,
+             calculation: `${f(monthlyMetric)}人 × ${durationVal}ヶ月`,
              result: f(totalUserMonths), unit: 'ヶ月'
            });
         } else {
           // Break down the primary metric (successful upsells/cross-sells)
-          nPB = Math.round(primaryMetric * (rPB / 100));
-          nF1 = Math.round(primaryMetric * (rF1 / 100));
-          nHL = Math.round(primaryMetric * (rHL / 100));
-          nBS = Math.round(primaryMetric * (rBS / 100));
-          nOT = Math.round(primaryMetric * (rOT / 100));
+          nPB = Math.round(monthlyMetric * (rPB / 100));
+          nF1 = Math.round(monthlyMetric * (rF1 / 100));
+          nHL = Math.round(monthlyMetric * (rHL / 100));
+          nBS = Math.round(monthlyMetric * (rBS / 100));
+          nOT = Math.round(monthlyMetric * (rOT / 100));
 
           // Calculate total user-months of benefit
           const durations = isUpsell ? UPSELL_DURATIONS : CROSSSELL_DURATIONS;
@@ -536,7 +540,7 @@ export default function EffectCalculator() {
           details.push({
             label: `各ジャンルの${term}顧客数`, formula: `${term}の想定顧客数 × ${term}顧客構成比率`,
             calculation: `プロ野球:${f(nPB)}, F1:${f(nF1)}, 韓流:${f(nHL)}, 基本プラン:${f(nBS)}, その他:${f(nOT)}`,
-            result: f(primaryMetric), unit: '人'
+            result: f(monthlyMetric), unit: '人'
           });
           const durationLabel = isUpsell ? 'アップセル後の推定継続期間' : 'クロスセル後の推定継続期間';
           details.push({
@@ -553,9 +557,10 @@ export default function EffectCalculator() {
         profit = (totalRevenue * effectiveDuration) - numCost;
 
         details.unshift({
-          label: primaryLabel, formula: '施策の対象顧客数 × 想定CVR',
+          label: isRegular ? `${primaryLabel}（1ヶ月あたり）` : primaryLabel,
+          formula: '施策の対象顧客数 × 想定CVR',
           calculation: `${f(numTarget)}人 × ${f(numCvr)}%`,
-          result: f(primaryMetric), unit: '人'
+          result: f(monthlyMetric), unit: '人'
         });
         
         // LOGIC DIFFERENCE: Details for ARPU calculation
@@ -592,6 +597,15 @@ export default function EffectCalculator() {
       });
     }
 
+    if (isRegular) {
+      details = details.map(d => {
+        if (d.label !== '想定利益' && d.label !== '想定ROI' && d.label !== 'ARPUの想定増加額' && !d.label.endsWith('（1ヶ月あたり）')) {
+          return { ...d, label: `${d.label}（1ヶ月あたり）` };
+        }
+        return d;
+      });
+    }
+
     setResults({ primaryMetric, primaryLabel, sacOrArpu, sacLabel, profit, roi, isProfit: profit >= 0, details, isValid, error });
   }, [category, activeTab, targetCount, cvr, cost, duration, priceAfter, ratioProBaseball, ratioF1, ratioHallyu, ratioBasic, ratioOthers, isOverallMode]);
 
@@ -614,58 +628,6 @@ export default function EffectCalculator() {
   } else {
     characterVariant = results.profit >= 0 ? 'fun' : 'sad';
   }
-
-  // Helper to render Ratio Inputs
-  const RatioInputs = () => (
-    <div className="mt-6 mb-6 p-4 bg-white/50 rounded-2xl border border-gray-100 shadow-sm backdrop-blur-sm">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-xs font-black text-gray-600 flex items-center gap-1.5 uppercase tracking-wider">
-          <PieChart size={14} className="text-[#29a1c0]" />
-          {isUpsellRatioMode ? `${category === CATEGORIES.UPSELL.id ? "アップセル" : "クロスセル"}構成比` : "加入者構成比"}
-        </h3>
-        {(isAcqRatioMode || isUpsellRatioMode) && (
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold text-gray-400">全体</span>
-            <button
-              onClick={() => setIsOverallMode(!isOverallMode)}
-              className={`w-10 h-5 rounded-full relative transition-colors duration-200 focus:outline-none ${isOverallMode ? 'bg-[#29a1c0]' : 'bg-gray-300'}`}
-            >
-              <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-200 ${isOverallMode ? 'left-6' : 'left-1'}`} />
-            </button>
-          </div>
-        )}
-        {!isOverallMode && (
-          <div className={`px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm ring-1 ring-inset ${currentRatioTotal === 100 ? 'bg-emerald-50 text-emerald-600 ring-emerald-100' : 'bg-rose-50 text-rose-600 ring-rose-100'}`}>
-            計: {currentRatioTotal}%
-          </div>
-        )}
-      </div>
-
-      {!isOverallMode ? (
-        <div className="grid grid-cols-2 gap-x-3 gap-y-2 animate-fadeIn">
-          <InputField label="プロ野球きっかけ顧客" value={ratioProBaseball} onChange={setRatioProBaseball} suffix="%" placeholder="100" error={isRatioInvalid} compact={true} />
-          <InputField label="F1きっかけ顧客" value={ratioF1} onChange={setRatioF1} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
-          <InputField label="韓流きっかけ顧客" value={ratioHallyu} onChange={setRatioHallyu} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
-          <InputField label="基本プラン顧客" value={ratioBasic} onChange={setRatioBasic} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
-          <InputField label="その他顧客" value={ratioOthers} onChange={setRatioOthers} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
-        </div>
-      ) : (
-        <div className="py-4 text-center animate-fadeIn">
-          {isAcqRatioMode ? (
-            <p className="text-sm font-bold text-[#29a1c0] bg-cyan-50/50 py-3 rounded-xl border border-cyan-100/50">全体の想定LTV（¥{formatNumber(currentLtvSet.OVERALL)}）を使用して試算します</p>
-          ) : (
-             <p className="text-sm font-bold text-[#29a1c0] bg-cyan-50/50 py-3 rounded-xl border border-cyan-100/50">全体の{category === CATEGORIES.UPSELL.id ? 'アップセル後の推定継続期間' : 'クロスセル後の推定継続期間'}（{category === CATEGORIES.UPSELL.id ? UPSELL_DURATION_OVERALL : CROSSSELL_DURATION_OVERALL}ヶ月）を使用して試算します</p>
-          )}
-        </div>
-      )}
-
-      {isRatioInvalid && (
-        <p className="text-[10px] text-red-500 font-bold mt-2 flex items-center gap-1 animate-pulse">
-          <AlertCircle size={12} /> 合計を100%にする必要があります
-        </p>
-      )}
-    </div>
-  );
 
   return (
     <div className="min-h-screen w-full bg-[#F2F2F2] p-4 md:p-8 font-sans flex justify-center items-start selection:bg-cyan-100 selection:text-cyan-900">
@@ -735,11 +697,60 @@ export default function EffectCalculator() {
               </>
             )}
             
-            <InputField label="施策の対象顧客数" icon={Users} value={targetCount} onChange={setTargetCount} suffix="人" placeholder="10,000" />
+            <InputField label={activeTab === 'regular' ? "施策の対象顧客数（1ヶ月あたり）" : "施策の対象顧客数"} icon={Users} value={targetCount} onChange={setTargetCount} suffix="人" placeholder="10,000" />
             <InputField label={category === CATEGORIES.CHURN.id ? "解約率改善幅" : "想定CVR"} icon={BarChart2} value={cvr} onChange={setCvr} suffix="%" placeholder="1.5" />
 
             {/* Ratios (Shown BEFORE Cost) */}
-            {(isAcqRatioMode || isUpsellRatioMode) && <RatioInputs />}
+            {(isAcqRatioMode || isUpsellRatioMode) && (
+              <div className="mt-6 mb-6 p-4 bg-white/50 rounded-2xl border border-gray-100 shadow-sm backdrop-blur-sm">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-black text-gray-600 flex items-center gap-1.5 uppercase tracking-wider">
+                    <PieChart size={14} className="text-[#29a1c0]" />
+                    {isUpsellRatioMode ? `${category === CATEGORIES.UPSELL.id ? "アップセル" : "クロスセル"}構成比` : "加入者構成比"}
+                  </h3>
+                  {(isAcqRatioMode || isUpsellRatioMode) && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold text-gray-400">全体</span>
+                      <button
+                        onClick={() => setIsOverallMode(!isOverallMode)}
+                        className={`w-10 h-5 rounded-full relative transition-colors duration-200 focus:outline-none ${isOverallMode ? 'bg-[#29a1c0]' : 'bg-gray-300'}`}
+                      >
+                        <div className={`absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-200 ${isOverallMode ? 'left-6' : 'left-1'}`} />
+                      </button>
+                    </div>
+                  )}
+                  {!isOverallMode && (
+                    <div className={`px-2.5 py-1 rounded-full text-[10px] font-black shadow-sm ring-1 ring-inset ${currentRatioTotal === 100 ? 'bg-emerald-50 text-emerald-600 ring-emerald-100' : 'bg-rose-50 text-rose-600 ring-rose-100'}`}>
+                      計: {currentRatioTotal}%
+                    </div>
+                  )}
+                </div>
+
+                {!isOverallMode ? (
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-2 animate-fadeIn">
+                    <InputField label="プロ野球きっかけ顧客" value={ratioProBaseball} onChange={setRatioProBaseball} suffix="%" placeholder="100" error={isRatioInvalid} compact={true} />
+                    <InputField label="F1きっかけ顧客" value={ratioF1} onChange={setRatioF1} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
+                    <InputField label="韓流きっかけ顧客" value={ratioHallyu} onChange={setRatioHallyu} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
+                    <InputField label="基本プラン顧客" value={ratioBasic} onChange={setRatioBasic} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
+                    <InputField label="その他顧客" value={ratioOthers} onChange={setRatioOthers} suffix="%" placeholder="0" error={isRatioInvalid} compact={true} />
+                  </div>
+                ) : (
+                  <div className="py-4 text-center animate-fadeIn">
+                    {isAcqRatioMode ? (
+                      <p className="text-sm font-bold text-[#29a1c0] bg-cyan-50/50 py-3 rounded-xl border border-cyan-100/50">全体の想定LTV（¥{formatNumber(currentLtvSet.OVERALL)}）を使用して試算します</p>
+                    ) : (
+                       <p className="text-sm font-bold text-[#29a1c0] bg-cyan-50/50 py-3 rounded-xl border border-cyan-100/50">全体の{category === CATEGORIES.UPSELL.id ? 'アップセル後の推定継続期間' : 'クロスセル後の推定継続期間'}（{category === CATEGORIES.UPSELL.id ? UPSELL_DURATION_OVERALL : CROSSSELL_DURATION_OVERALL}ヶ月）を使用して試算します</p>
+                    )}
+                  </div>
+                )}
+
+                {isRatioInvalid && (
+                  <p className="text-[10px] text-red-500 font-bold mt-2 flex items-center gap-1 animate-pulse">
+                    <AlertCircle size={12} /> 合計を100%にする必要があります
+                  </p>
+                )}
+              </div>
+            )}
 
             <InputField label="施策コスト" icon={DollarSign} value={cost} onChange={setCost} suffix="円" placeholder="500,000" />
 
@@ -800,7 +811,7 @@ export default function EffectCalculator() {
 
         {/* Right Side: Results */}
         <div className="w-full lg:w-8/12 bg-slate-50/50 flex flex-col relative p-6 md:p-8 lg:p-10">
-          <div className="flex items-center justify-between mb-8 z-10">
+          <div className="flex items-center justify-between mb-5 z-10">
             <h2 className="text-xl font-bold text-slate-700 flex items-center gap-3">
               試算結果
             </h2>
@@ -813,7 +824,7 @@ export default function EffectCalculator() {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 z-10 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 z-10 mb-5">
             <ResultCard label={results.primaryLabel} value={formatNumber(results.primaryMetric)} unit="人" disabled={!results.isValid} />
             {results.sacLabel && <ResultCard label={results.sacLabel} value={`¥${formatCurrency(results.sacOrArpu)}`} unit="" disabled={!results.isValid} /> }
             <ResultCard label="想定利益" value={`¥${formatCurrency(results.profit)}`} unit="" disabled={!results.isValid} />
@@ -821,19 +832,19 @@ export default function EffectCalculator() {
           </div>
 
           {results.isValid ? (
-            <div className={`transition-all duration-500 overflow-hidden ${showDetails ? 'max-h-[800px] opacity-100 mb-8' : 'max-h-0 opacity-0'}`}>
-              <div className="bg-white rounded-3xl p-6 shadow-xl shadow-gray-200/50 border border-gray-100 overflow-y-auto max-h-[400px] custom-scrollbar">
-                <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4 border-b border-gray-50 pb-3 flex items-center gap-2">
+            <div className={`transition-all duration-500 overflow-hidden flex-1 ${showDetails ? 'max-h-[1200px] opacity-100 mb-5' : 'max-h-0 opacity-0'}`}>
+              <div className="bg-white rounded-3xl p-5 shadow-xl shadow-gray-200/50 border border-gray-100 overflow-y-auto h-full max-h-[700px] custom-scrollbar">
+                <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 border-b border-gray-50 pb-2 flex items-center gap-2">
                   <Calculator size={12} />
                   Calculation Details
                 </h3>
-                <div className="space-y-1">
+                <div className="space-y-0.5">
                   {results.details.map((d, i) => <DetailRow key={i} {...d} />)}
                 </div>
               </div>
             </div>
           ) : (
-            <div className="bg-rose-50 border border-rose-100 p-6 rounded-3xl mb-8 animate-fadeIn flex items-center gap-4 text-rose-800">
+            <div className="bg-rose-50 border border-rose-100 p-6 rounded-3xl mb-5 animate-fadeIn flex items-center gap-4 text-rose-800">
               <div className="p-3 bg-white rounded-full shadow-sm text-rose-500">
                 <AlertCircle size={24} />
               </div>
