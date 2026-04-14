@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, TrendingUp, DollarSign, Users, Calendar, RefreshCw, ChevronDown, ChevronUp, HelpCircle, BarChart2, PieChart, AlertCircle } from 'lucide-react';
+import { Calculator, TrendingUp, DollarSign, Users, Calendar, RefreshCw, ChevronDown, ChevronUp, HelpCircle, BarChart2, PieChart, AlertCircle, Copy, Check } from 'lucide-react';
 
 // --- Types ---
 
@@ -285,6 +285,7 @@ export default function EffectCalculator() {
   const [activeTab, setActiveTab] = useState<'single' | 'regular'>('single');
   const [showDetails, setShowDetails] = useState(false);
   const [isOverallMode, setIsOverallMode] = useState(false);
+  const [copied, setCopied] = useState(false);
  
   // Inputs (Standard)
   const [targetCount, setTargetCount] = useState('');
@@ -313,6 +314,40 @@ export default function EffectCalculator() {
     details: [],
     isValid: true
   });
+
+  const handleCopy = () => {
+    if (!results.isValid) return;
+
+    const currentCategory = Object.values(CATEGORIES).find(c => c.id === category);
+    let text = `【${currentCategory?.name || ''}】\n\n`;
+
+    text += "■ 試算結果\n";
+    text += `${results.primaryLabel}: ${formatNumber(results.primaryMetric)}人\n`;
+    if (results.sacLabel) {
+      text += `${results.sacLabel}: ¥${formatCurrency(results.sacOrArpu)}\n`;
+    }
+    text += `想定利益: ¥${formatCurrency(results.profit)}\n`;
+    text += `想定ROI: ${formatCurrency(results.roi)}%\n\n`;
+
+    text += "■ 試算結果の計測式\n";
+    results.details.forEach((detail, index) => {
+      if (detail.label) {
+        text += `[${detail.label}]\n`;
+      }
+      text += `計算式: ${detail.formula}\n`;
+      text += `${detail.calculation} = ${detail.result}${detail.unit}\n`;
+      if (index < results.details.length - 1) {
+        text += "\n";
+      }
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
+  };
 
   const currentLtvSet = category === CATEGORIES.ACQUISITION.id ? LTV_ACQUISITION : LTV_RETURN;
 
@@ -439,7 +474,7 @@ export default function EffectCalculator() {
 
         details.push({
           label: '想定利益',
-          formula: isRegular ? '総粗利 × 期間 － 施策コスト' : '総粗利 － 施策コスト',
+          formula: isRegular ? '総粗利 × 施策実施期間 － 施策コスト' : '総粗利 － 施策コスト',
           calculation: isRegular 
             ? `${f(grossProfit)}円 × ${f(effectiveDuration)}ヶ月 － ${f(numCost)}円`
             : `${f(grossProfit)}円 － ${f(numCost)}円`,
@@ -470,7 +505,7 @@ export default function EffectCalculator() {
       details.push({
         label: '想定利益', 
         formula: isRegular 
-          ? '想定解約抑止顧客数 × 想定ARPU × 粗利率（0.3） × 期間 － 施策コスト' 
+          ? '想定解約抑止顧客数 × 想定ARPU × 粗利率（0.3） × 施策実施期間 － 施策コスト' 
           : '想定解約抑止顧客数 × 想定ARPU × 粗利率（0.3） － 施策コスト',
         calculation: isRegular
           ? `${f(monthlyMetric)}人 × ${f(ARPU)}円 × 0.3 × ${f(effectiveDuration)}ヶ月 － ${f(numCost)}円`
@@ -579,7 +614,7 @@ export default function EffectCalculator() {
         }
         
         details.push({
-          label: '想定利益', formula: isRegular ? '総継続月数 × ARPUの想定増加額 × 0.3 × 期間 － 施策コスト' : '総継続月数 × ARPUの想定増加額 × 0.3 － 施策コスト',
+          label: '想定利益', formula: isRegular ? '総継続月数 × ARPUの想定増加額 × 0.3 × 施策実施期間 － 施策コスト' : '総継続月数 × ARPUの想定増加額 × 0.3 － 施策コスト',
           calculation: isRegular
             ? `(${f(totalUserMonths)} × ${f(sacOrArpu)} × 0.3) × ${f(effectiveDuration)} － ${f(numCost)}`
             : `(${f(totalUserMonths)} × ${f(sacOrArpu)} × 0.3) － ${f(numCost)}`,
@@ -812,9 +847,19 @@ export default function EffectCalculator() {
         {/* Right Side: Results */}
         <div className="w-full lg:w-8/12 bg-slate-50/50 flex flex-col relative p-6 md:p-8 lg:p-10">
           <div className="flex items-center justify-between mb-5 z-10">
-            <h2 className="text-xl font-bold text-slate-700 flex items-center gap-3">
-              試算結果
-            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-xl font-bold text-slate-700 flex items-center gap-3">
+                試算結果
+              </h2>
+              <button
+                onClick={handleCopy}
+                disabled={!results.isValid}
+                className={`flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-bold transition-all ${!results.isValid ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50 hover:text-slate-700 shadow-sm'}`}
+              >
+                {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
+                {copied ? <span className="text-green-600">Copied!</span> : "Copy"}
+              </button>
+            </div>
             <button 
               onClick={() => setShowDetails(!showDetails)} 
               disabled={!results.isValid}
